@@ -1,5 +1,5 @@
-import Foundation
 import UIKit
+
 public class SelectHeroViewController: UIViewController{
     
     private let heroImageView: UIImageView = UIImageView()
@@ -8,43 +8,60 @@ public class SelectHeroViewController: UIViewController{
     private let leeButton: UIButton = UIButton()
     private let heroNameImageView: UIImageView = UIImageView(image: Heroes.todoNameImage)
     private let heroButtonStackView: UIStackView = UIStackView()
+    
     override public func viewDidLoad() {
+        
         super.viewDidLoad()
         setupUI()
+        
     }
     
     private func setupUI(){
+        
         bgImageViewSetup()
         selectHeroTextSetup()
         heroImageViewSetup()
         heroDraftSetup()
         setPlayBackButtonSetup()
         setNameHeroSetup()
+        
     }
     
     private func bgImageViewSetup(){
+        
         let bgImageView: UIImageView = UIImageView(image: Backgrounds.firstPageBG)
+        
         self.view.addSubview(bgImageView)
         self.view.sendSubviewToBack(bgImageView)
+        
         bgImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        bgImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-        bgImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-        bgImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-        bgImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 0),
+            
+            bgImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            bgImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            bgImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            bgImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 0),
+        
         ])
+        
     }
     
     private func selectHeroTextSetup(){
+        
         let selectHeroTextImagaView: UIImageView = UIImageView(image: TitleAndButton.selectHeroButton)
+        
         self.view.addSubview(selectHeroTextImagaView)
+        
         selectHeroTextImagaView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            
             selectHeroTextImagaView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            selectHeroTextImagaView.bottomAnchor.constraint(equalTo:selectHeroTextImagaView.topAnchor, constant: 50),
+            selectHeroTextImagaView.heightAnchor .constraint(equalToConstant: 50),
             selectHeroTextImagaView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 150),
-            selectHeroTextImagaView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150),
+            selectHeroTextImagaView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150)
+            
         ])
+        
     }
     
     private func heroImageViewSetup(){
@@ -55,12 +72,15 @@ public class SelectHeroViewController: UIViewController{
         heroImageView.startAnimating()
         
         self.view.addSubview(heroImageView)
+        
         heroImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            
             heroImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
-            heroImageView.topAnchor.constraint(equalTo: heroImageView.bottomAnchor, constant: -200),
+            heroImageView.heightAnchor.constraint(equalToConstant: 200),
             heroImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            heroImageView.trailingAnchor.constraint(equalTo: heroImageView.leadingAnchor, constant: 200)
+            heroImageView.widthAnchor.constraint(equalToConstant: 200)
+            
         ])
     }
     
@@ -80,6 +100,8 @@ public class SelectHeroViewController: UIViewController{
         todoButton.tag = 0
         leeButton.tag = 1
         
+        todoButton.addTarget(self, action: #selector(setStateHeroCounter), for: .touchUpInside)
+        leeButton.addTarget(self, action: #selector(setStateHeroCounter), for: .touchUpInside)
         
         todoButton.layer.cornerRadius = 5
         todoButton.layer.borderWidth = 5
@@ -93,18 +115,23 @@ public class SelectHeroViewController: UIViewController{
         
         heroButtonStackView.addArrangedSubview(todoButton)
         heroButtonStackView.addArrangedSubview(leeButton)
+        
         self.view.addSubview(heroButtonStackView)
+        
         heroButtonStackView.translatesAutoresizingMaskIntoConstraints = false
-//        heroButtonStackView.contentMode = .scaleAspectFit
         NSLayoutConstraint.activate([
+            
             heroButtonStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
-            heroButtonStackView.leadingAnchor.constraint(equalTo: heroButtonStackView.trailingAnchor, constant: -250),
+            heroButtonStackView.widthAnchor.constraint(equalToConstant: 250),
             heroButtonStackView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 130),
-            heroButtonStackView.bottomAnchor.constraint(equalTo: heroButtonStackView.topAnchor, constant: 150),
+            heroButtonStackView.heightAnchor.constraint(equalToConstant: 150),
+            
         ])
+        
     }
     
     private func setPlayBackButtonSetup(){
+        
         let startButton: UIButton = UIButton()
         let backButton: UIButton = UIButton()
         let actionButtonStackView: UIStackView = UIStackView()
@@ -119,57 +146,100 @@ public class SelectHeroViewController: UIViewController{
         backButton.setImage(TitleAndButton.backButton, for: .normal)
         
         backButton.addTarget(self, action: #selector(backToHomePage), for: .touchUpInside)
+        startButton.addTarget(self, action: #selector(toStartGame), for: .touchUpInside)
         
         actionButtonStackView.addArrangedSubview(backButton)
         actionButtonStackView.addArrangedSubview(startButton)
+        
         self.view.addSubview(actionButtonStackView)
+        
         actionButtonStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            
             actionButtonStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
             actionButtonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            actionButtonStackView.topAnchor.constraint(equalTo: actionButtonStackView.bottomAnchor, constant: -50),
-            actionButtonStackView.leadingAnchor.constraint(equalTo: actionButtonStackView.trailingAnchor, constant: -280)
+            actionButtonStackView.heightAnchor.constraint(equalToConstant: 50),
+            actionButtonStackView.widthAnchor.constraint(equalToConstant: 280)
+            
         ])
+        
     }
     
     
     @objc private func setStateHero(sender: UIButton){
+        
         stateHero = sender.tag
-        print(stateHero)
+        
         if stateHero == 0{
-            todoButton.layer.borderWidth = 5
-            leeButton.layer.borderWidth = 0
-            todoButton.isEnabled = false
-            leeButton.isEnabled = true
+            
+            clickButtonChangeState(button: todoButton)
             heroNameImageView.image = Heroes.todoNameImage
+            
         } else{
-            todoButton.layer.borderWidth = 0
-            leeButton.layer.borderWidth = 5
-            todoButton.isEnabled = true
-            leeButton.isEnabled = false
+            
+            clickButtonChangeState(button: leeButton)
             heroNameImageView.image = Heroes.leeNameImage
+            
         }
+        
         heroImageView.stopAnimating()
         heroImageView.animationImages = stateHero == 0 ? Heroes.todoIdle : Heroes.leeIdle
         heroImageView.animationDuration = 2.5
         heroImageView.startAnimating()
+        
+    }
+    
+    private func clickButtonChangeState(button: UIButton){
+        
+        todoButton.isEnabled = true
+        leeButton.isEnabled = true
+        todoButton.layer.borderWidth = 0
+        leeButton.layer.borderWidth = 0
+        
+        button.isEnabled = false
+        button.layer.borderWidth = 5
+        
     }
     
     private func setNameHeroSetup(){
+        
         self.view.addSubview(heroNameImageView)
         
         heroNameImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            
             heroNameImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             heroNameImageView.bottomAnchor.constraint(equalTo: heroNameImageView.topAnchor, constant: 100),
             heroNameImageView.leadingAnchor.constraint(equalTo: heroImageView.trailingAnchor, constant: 50),
             heroNameImageView.trailingAnchor.constraint(equalTo: heroButtonStackView.leadingAnchor, constant: -50)
+            
         ])
         
     }
     
+    @objc private func toStartGame(){
+        
+        SoundManager.stopSound()
+        
+        let vc = GameSceneViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.gameModel = PlayGameModel()
+        vc.gameModel.playerHero = stateHero == 0 ? .TODO : .LEE
+        self.present(vc, animated: false, completion: nil)
+        
+        
+    }
+    
     @objc private func backToHomePage(){
+        
         self.dismiss(animated: false, completion: nil)
+        
+    }
+    
+    @objc private func setStateHeroCounter(sender: UIButton){
+        
+        stateHero = sender.tag
+        
     }
     
 }

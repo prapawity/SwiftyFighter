@@ -1,5 +1,5 @@
-import Foundation
 import UIKit
+
 public struct Heroes{
     public static let todoNameImage: UIImage = UIImage(named: "Text/todoName.png")!
     public static let leeNameImage: UIImage = UIImage(named: "Text/leeName.png")!
@@ -12,8 +12,7 @@ public struct Heroes{
         UIImage(named: "Heroes/1/idle/2.png")!,
         UIImage(named: "Heroes/1/idle/3.png")!,
         UIImage(named: "Heroes/1/idle/4.png")!,
-        
-        
+
 
     ]
     
@@ -25,7 +24,11 @@ public struct Heroes{
         UIImage(named: "Heroes/1/dead/10.png")!,
         UIImage(named: "Heroes/1/dead/11.png")!,
         UIImage(named: "Heroes/1/dead/12.png")!
-
+    ]
+    
+    public static let todoAttack: [UIImage] = [
+        UIImage(named: "Heroes/1/attack/13.png")!,
+        UIImage(named: "Heroes/1/attack/14.png")!,
     ]
     
     public static let leeIdle: [UIImage] = [
@@ -42,6 +45,14 @@ public struct Heroes{
         UIImage(named: "Heroes/2/dead/7.png")!,
         UIImage(named: "Heroes/2/dead/8.png")!,
         UIImage(named: "Heroes/2/dead/9.png")!,
+    ]
+    
+    public static let leeAttack: [UIImage] = [
+        
+    UIImage(named: "Heroes/2/attack/11.png")!,
+    UIImage(named: "Heroes/2/attack/12.png")!,
+    UIImage(named: "Heroes/2/attack/13.png")!,
+
     ]
     
 }
