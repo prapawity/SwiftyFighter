@@ -18,7 +18,7 @@ class Game{
 }
 
 // to start Game
-Game.start()
+Game.start() // if screen is black, please click again
 
 // Credit
 // Backgrounds by ansimuz.itch.io

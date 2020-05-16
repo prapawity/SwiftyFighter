@@ -1,17 +1,20 @@
 import Foundation
 import AVFoundation
 public struct SoundManager{
+    
     private static var avManager: AVAudioPlayer?
+    public static var isMute: Bool = false
+    public static var isPlay: Bool = true
     
     public static func punchSound(){
         let path = Bundle.main.path(forResource: "Sounds/punch.mp3", ofType:nil)!
         let url = URL(fileURLWithPath: path)
         do {
             avManager = try AVAudioPlayer(contentsOf: url)
-            avManager?.volume = 1.0;
+            avManager?.volume = isMute ? 0 : 1.0;
             avManager?.play()
         } catch {
-            // couldn't load file :(
+            print("Error, could not load file")
         }
     }
     
@@ -20,7 +23,7 @@ public struct SoundManager{
         let url = URL(fileURLWithPath: path)
         do {
             avManager = try AVAudioPlayer(contentsOf: url)
-            avManager?.volume = 0.8;
+            avManager?.volume = isMute ? 0 : 0.8;
             avManager?.play()
         } catch {
             // couldn't load file :(
@@ -32,8 +35,9 @@ public struct SoundManager{
         let url = URL(fileURLWithPath: path)
         do {
             avManager = try AVAudioPlayer(contentsOf: url)
-            avManager?.volume = 1;
+            avManager?.volume = isMute ? 0 : 1;
             avManager?.play()
+            isPlay = false
         } catch {
             // couldn't load file :(
         }
@@ -45,18 +49,22 @@ public struct SoundManager{
         do {
             avManager = try AVAudioPlayer(contentsOf: url)
             avManager?.volume = 0;
+            avManager?.numberOfLoops = -1
             avManager?.play()
-            avManager?.setVolume(0.8, fadeDuration: 3)
+            avManager?.setVolume(isMute ? 0 : 0.8, fadeDuration: 3)
+            isPlay = true
         } catch {
             // couldn't load file :(
         }
     }
     
+    public static func muteSound(){
+        isMute ? avManager?.setVolume(0, fadeDuration: 1.5) : avManager?.setVolume(0.8, fadeDuration: 3)
+    }
+    
     public static func stopSound(){
         avManager?.setVolume(0, fadeDuration: 2)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8, execute: {
-//
-//        })
+        isPlay = false
         
     }
     

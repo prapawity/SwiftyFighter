@@ -26,5 +26,11 @@ public struct TitleAndButton{
         UIImage(named: "Button/startButton.png")!
     
     public static let backButton: UIImage =
-    UIImage(named: "Button/backButton.png")!
+        UIImage(named: "Button/backButton.png")!
+    
+    public static let muteButton: UIImage =
+        UIImage(named: "Button/mute.png")!
+    
+    public static let unMuteButton: UIImage =
+        UIImage(named: "Button/unmute.png")!
 }

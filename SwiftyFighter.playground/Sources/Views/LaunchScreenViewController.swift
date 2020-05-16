@@ -8,11 +8,14 @@ public class LaunchScreenViewController: UIViewController{
 
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.07450980392, green: 0.1019607843, blue: 0.1764705882, alpha: 1)
-        setupUI()
-        SoundManager.introSound()
 
     }
 
+    override public func viewDidAppear(_ animated: Bool){
+        setupUI()
+        SoundManager.introSound()
+    }
+    
     private func setupUI(){
 
         var counter: Int = 0

@@ -19,7 +19,7 @@ public class MainpageViewController: UIViewController{
         bgImageViewSetup()
         logoImageViewSetup()
         stackButtonSetup()
-        
+        muteUnmuteButtonSetup()
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut, animations: {
 
             self.logoImageView.alpha = 1
@@ -27,6 +27,39 @@ public class MainpageViewController: UIViewController{
 
         }, completion: nil)
         
+    }
+    
+    private func muteUnmuteButtonSetup(){
+        let muteUnMuteButton: UIButton = UIButton()
+        
+        muteUnMuteButton.setImage(SoundManager.isMute ? TitleAndButton.muteButton : TitleAndButton.unMuteButton, for: .normal)
+        
+        muteUnMuteButton.addTarget(self, action: #selector(muteUnmuteAction), for: .touchUpInside)
+        
+        
+        
+        self.view.addSubview(muteUnMuteButton)
+        
+        muteUnMuteButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+        
+            muteUnMuteButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            muteUnMuteButton.heightAnchor.constraint(equalToConstant: 20),
+            muteUnMuteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            muteUnMuteButton.widthAnchor.constraint(equalToConstant: 20)
+        
+        ])
+        
+    }
+    
+    @objc private func muteUnmuteAction(sender: UIButton){
+        
+        SoundManager.isMute = !SoundManager.isMute
+        
+        sender.setImage(SoundManager.isMute ? TitleAndButton.muteButton : TitleAndButton.unMuteButton, for: .normal)
+        
+        SoundManager.muteSound()
     }
     
     private func bgImageViewSetup(){

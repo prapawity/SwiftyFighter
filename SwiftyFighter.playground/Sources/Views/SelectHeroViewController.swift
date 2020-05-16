@@ -15,6 +15,11 @@ public class SelectHeroViewController: UIViewController{
         setupUI()
         
     }
+    override public func viewDidAppear(_ animated: Bool){
+        if SoundManager.isPlay == false{
+            SoundManager.introSound()
+        }
+    }
     
     private func setupUI(){
         
